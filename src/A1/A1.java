@@ -38,7 +38,7 @@ public class A1 {
             var firstNumber = input.get(i);
             var secondNumber = target - firstNumber;
             if (input.contains(secondNumber) && secondNumber != firstNumber) {
-                System.out.println("Result of Two Numbers: " + firstNumber * secondNumber);
+                System.out.println("Improved -> Result of Two Numbers: " + firstNumber * secondNumber);
                 result.add(firstNumber);
                 result.add(secondNumber);
             }
@@ -86,7 +86,7 @@ public class A1 {
                 var secondNumber = input.get(j);
                 var thirdNumber = diff - secondNumber;
                 if (input.contains(thirdNumber) && thirdNumber != firstNumber && secondNumber != firstNumber && secondNumber != thirdNumber) {
-                    System.out.println("Result of Three Numbers: " + firstNumber * secondNumber * thirdNumber);
+                    System.out.println("Improved -> Result of Three Numbers: " + firstNumber * secondNumber * thirdNumber);
                     result.add(firstNumber);
                     result.add(secondNumber);
                     result.add(thirdNumber);
@@ -95,6 +95,38 @@ public class A1 {
 
         }
 
+        return result;
+    }
+
+    /**
+     * O(n²)
+     * @param input
+     * @param target
+     * @return
+     */
+    private static Set<Integer> getThreeNumbersImprovedLambda(List<Integer> input, int target) {
+
+        var result = new HashSet<Integer>();
+        for (var i = 0; i < input.size(); i ++) {
+            var firstNumber = input.get(i);
+            var diff = target - firstNumber;
+            for(var j = 0; j < input.size(); j ++) {
+                var secondNumber = input.get(j);
+                if (secondNumber != firstNumber) {
+                    var thirdNumber = input.stream().filter(num -> num != secondNumber && num != firstNumber)
+                            .filter(num -> num == (diff - secondNumber))
+                            .findAny()
+                            .orElse(null);
+                    if (thirdNumber != null) {
+                        System.out.println("Lambda -> Result of Three Numbers: " + firstNumber * secondNumber * thirdNumber);
+                        result.add(firstNumber);
+                        result.add(secondNumber);
+                        result.add(thirdNumber);
+                    }
+                }
+            }
+        }
+        System.out.println("Lambda 3-sum: " + result);
         return result;
     }
 
@@ -155,5 +187,6 @@ public class A1 {
 
         var intSumOfThree = getThreeNumbers();
         var intSumOfThreeImproved = getThreeNumbersImproved(input, TARGET_SUM);
+        var intSumOfThreeLambda = getThreeNumbersImprovedLambda(input, TARGET_SUM);
     }
 }
