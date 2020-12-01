@@ -23,14 +23,14 @@ public class A1 {
         }
     }
 
-    private static List<Integer> getSumOfTwoNumbers() throws IOException {
+    private static List<Integer> getTwoNumbers() throws IOException {
         var pair = new ArrayList<Integer>();
         for (int i = 0; i < input.size() - 1; i ++) {
             var firstNumber = input.get(i);
             for(int j = i + 1; j < input.size(); j ++) {
                 var secondNumber = input.get(j);
 
-                if (firstNumber + secondNumber == 2020) {
+                if (firstNumber + secondNumber == TARGET_SUM) {
                     System.out.println("Result of Two Numbers: " + firstNumber * secondNumber);
                     pair.add(firstNumber);
                     pair.add(secondNumber);
@@ -41,7 +41,7 @@ public class A1 {
         return pair;
     }
 
-    private static List<Integer> getSumOfThreeNumbers() throws IOException {
+    private static List<Integer> getThreeNumbers() throws IOException {
         var pair = new ArrayList<Integer>();
         for (int i = 0; i < input.size() - 2; i ++) {
             var firstNumber = input.get(i);
@@ -50,7 +50,7 @@ public class A1 {
 
                 for (int k = j + 1; k < input.size(); k ++) {
                     var thirdNumber = input.get(k);
-                    if (firstNumber + secondNumber + thirdNumber == 2020) {
+                    if (firstNumber + secondNumber + thirdNumber == TARGET_SUM) {
                         System.out.println("Result of Three Numbers: " + firstNumber * secondNumber * thirdNumber);
                         pair.add(firstNumber);
                         pair.add(secondNumber);
@@ -64,7 +64,7 @@ public class A1 {
     }
 
     public static void main(String[] args) throws IOException {
-        var intSum = getSumOfTwoNumbers();
-        var intSumOfThree = getSumOfThreeNumbers();
+        var intSum = getTwoNumbers();
+        var intSumOfThree = getThreeNumbers();
     }
 }
