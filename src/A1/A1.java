@@ -1,6 +1,7 @@
 package A1;
 
 import java.io.*;
+import java.lang.annotation.Target;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -24,6 +25,12 @@ public class A1 {
         }
     }
 
+    /**
+     * O(n)
+     * @param input
+     * @param target
+     * @return
+     */
     private static Set<Integer> getTwoNumbersImproved(List<Integer> input, int target) {
 
         var result = new HashSet<Integer>();
@@ -40,6 +47,38 @@ public class A1 {
         return result;
     }
 
+    /**
+     * O(n²)
+     * @param input
+     * @param target
+     * @return
+     */
+    private static Set<Integer> getThreeNumbersImproved(List<Integer> input, int target) {
+
+        var result = new HashSet<Integer>();
+        for (var i = 0; i < input.size(); i ++) {
+            var firstNumber = input.get(i);
+            var diff = target - firstNumber;
+            for(var j = 0; j < input.size(); j ++) {
+                var secondNumber = input.get(j);
+                var thirdNumber = diff - secondNumber;
+                if (input.contains(thirdNumber) && thirdNumber != firstNumber && secondNumber != firstNumber && secondNumber != thirdNumber) {
+                    System.out.println("Result of Three Numbers: " + firstNumber * secondNumber * thirdNumber);
+                    result.add(firstNumber);
+                    result.add(secondNumber);
+                }
+            }
+
+        }
+
+        return result;
+    }
+
+    /**
+     * O(n²)
+     * @return
+     * @throws IOException
+     */
     private static List<Integer> getTwoNumbers() throws IOException {
         var pair = new ArrayList<Integer>();
         for (int i = 0; i < input.size() - 1; i ++) {
@@ -58,6 +97,11 @@ public class A1 {
         return pair;
     }
 
+    /**
+     * O(n³)
+     * @return
+     * @throws IOException
+     */
     private static List<Integer> getThreeNumbers() throws IOException {
         var pair = new ArrayList<Integer>();
         for (int i = 0; i < input.size() - 2; i ++) {
@@ -84,5 +128,6 @@ public class A1 {
         var intSum = getTwoNumbers();
         var intSumImproved = getTwoNumbersImproved(input, TARGET_SUM);
         var intSumOfThree = getThreeNumbers();
+        var intSumOfThreeImproved = getThreeNumbersImproved(input, TARGET_SUM);
     }
 }
