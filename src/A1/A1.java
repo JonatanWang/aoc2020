@@ -66,6 +66,7 @@ public class A1 {
                     System.out.println("Result of Three Numbers: " + firstNumber * secondNumber * thirdNumber);
                     result.add(firstNumber);
                     result.add(secondNumber);
+                    result.add(thirdNumber);
                 }
             }
 
