@@ -9,33 +9,62 @@ import java.util.stream.Collectors;
 
 public class A1 {
 
-    private static List<Integer> getIntegerList() throws IOException {
+    private static final int TARGET_SUM = 2020;
+    private static final String FILE_NAME = "/home/zyw/dev/aoc/2020/src/A1/data";
+    private static List<Integer> input;
 
-        var fileName = "/home/zyw/dev/aoc/2020/src/A1/data";
-        List<Integer> list = Files.lines(Paths.get(fileName))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        //System.out.println(list);
-        return list;
+    static {
+        try {
+            input = Files.lines(Paths.get(FILE_NAME))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void main(String[] args) throws IOException {
-        var list = getIntegerList();
+    private static List<Integer> getSumOfTwoNumbers() throws IOException {
         var pair = new ArrayList<Integer>();
-        for (int i = 0; i < list.size() - 1; i ++) {
-            int firstNumber = list.get(i);
-            for(int j = i + 1; j < list.size(); j ++) {
-                int secondNumber = list.get(j);
+        for (int i = 0; i < input.size() - 1; i ++) {
+            var firstNumber = input.get(i);
+            for(int j = i + 1; j < input.size(); j ++) {
+                var secondNumber = input.get(j);
 
                 if (firstNumber + secondNumber == 2020) {
-                    System.out.println("Result: " + firstNumber * secondNumber);
+                    System.out.println("Result of Two Numbers: " + firstNumber * secondNumber);
                     pair.add(firstNumber);
                     pair.add(secondNumber);
                 }
             }
         }
 
-        System.out.println(pair);
+        return pair;
+    }
+
+    private static List<Integer> getSumOfThreeNumbers() throws IOException {
+        var pair = new ArrayList<Integer>();
+        for (int i = 0; i < input.size() - 2; i ++) {
+            var firstNumber = input.get(i);
+            for(int j = i + 1; j < input.size() - 1; j ++) {
+                var secondNumber = input.get(j);
+
+                for (int k = j + 1; k < input.size(); k ++) {
+                    var thirdNumber = input.get(k);
+                    if (firstNumber + secondNumber + thirdNumber == 2020) {
+                        System.out.println("Result of Three Numbers: " + firstNumber * secondNumber * thirdNumber);
+                        pair.add(firstNumber);
+                        pair.add(secondNumber);
+                        pair.add(thirdNumber);
+                    }
+                }
+            }
+        }
+
+        return pair;
+    }
+
+    public static void main(String[] args) throws IOException {
+        var intSum = getSumOfTwoNumbers();
+        var intSumOfThree = getSumOfThreeNumbers();
     }
 }
