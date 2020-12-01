@@ -1,13 +1,13 @@
 package A1;
 
-import java.io.*;
-import java.lang.annotation.Target;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toSet;
 
 public class A1 {
 
@@ -39,6 +39,29 @@ public class A1 {
             var secondNumber = target - firstNumber;
             if (input.contains(secondNumber) && secondNumber != firstNumber) {
                 System.out.println("Result of Two Numbers: " + firstNumber * secondNumber);
+                result.add(firstNumber);
+                result.add(secondNumber);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * O(n)
+     * @param input
+     * @param target
+     * @return
+     */
+    private static Set<Integer> getTwoNumbersImprovedLambda(List<Integer> input, int target) {
+
+        var result = new HashSet<Integer>();
+        for (var i = 0; i < input.size(); i ++) {
+            var firstNumber = input.get(i);
+            var secondNumber =
+                    input.stream().filter(num -> num != firstNumber).filter(num -> num == target - firstNumber).findAny().orElse(null);
+            if (secondNumber != null) {
+                System.out.println("Lambda -> Result of Two Numbers: " + firstNumber * secondNumber);
                 result.add(firstNumber);
                 result.add(secondNumber);
             }
@@ -128,6 +151,8 @@ public class A1 {
     public static void main(String[] args) throws IOException {
         var intSum = getTwoNumbers();
         var intSumImproved = getTwoNumbersImproved(input, TARGET_SUM);
+        var intSumLambda = getTwoNumbersImprovedLambda(input, TARGET_SUM);
+
         var intSumOfThree = getThreeNumbers();
         var intSumOfThreeImproved = getThreeNumbersImproved(input, TARGET_SUM);
     }
