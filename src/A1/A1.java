@@ -3,9 +3,10 @@ package A1;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toSet;
 
 public class A1 {
 
@@ -21,6 +22,22 @@ public class A1 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static Set<Integer> getTwoNumbersImproved(List<Integer> input, int target) {
+
+        var result = new HashSet<Integer>();
+        for (var i = 0; i < input.size(); i ++) {
+            var firstNumber = input.get(i);
+            var secondNumber = target - firstNumber;
+            if (input.contains(secondNumber) && secondNumber != firstNumber) {
+                System.out.println("Result of Two Numbers: " + firstNumber * secondNumber);
+                result.add(firstNumber);
+                result.add(secondNumber);
+            }
+        }
+
+        return result;
     }
 
     private static List<Integer> getTwoNumbers() throws IOException {
@@ -65,6 +82,7 @@ public class A1 {
 
     public static void main(String[] args) throws IOException {
         var intSum = getTwoNumbers();
+        var intSumImproved = getTwoNumbersImproved(input, TARGET_SUM);
         var intSumOfThree = getThreeNumbers();
     }
 }
