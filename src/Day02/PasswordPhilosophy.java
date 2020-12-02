@@ -24,7 +24,6 @@ public class PasswordPhilosophy {
 
     private static boolean isValidPassword(String passwordInput) {
 
-        var result = false;
         var passwordParts = passwordInput.split(" ");
         var interval = passwordParts[0].split("-");
         var min = Integer.valueOf(interval[0]);
@@ -38,7 +37,29 @@ public class PasswordPhilosophy {
                 counter++;
             }
         }
-        result = counter >= min && counter <= max;
+        var result = counter >= min && counter <= max;
+
+        return result;
+    }
+
+    private static boolean isValidPasswordByNewPolicy (String passwordInput) {
+
+        var passwordParts = passwordInput.split(" ");
+        var interval = passwordParts[0].split("-");
+        var firstPlace = Integer.valueOf(interval[0]);
+        var secondPlace = Integer.valueOf(interval[1]);
+        var targetChar = passwordParts[1].split(":")[0].charAt(0);
+        var password = passwordParts[2].toCharArray();
+
+        var counter = 0;
+        if (firstPlace > 0 && password[firstPlace - 1] == targetChar) {
+            counter++;
+        }
+        if (secondPlace <= password.length && password[secondPlace - 1] == targetChar) {
+            counter++;
+        }
+
+        var result = counter == 1 ? true : false;
 
         return result;
     }
@@ -46,5 +67,8 @@ public class PasswordPhilosophy {
     public static void main(String[] args) {
         var numOfValidPasswords = input.stream().filter(passwordInput -> isValidPassword(passwordInput)).count();
         System.out.println(numOfValidPasswords);
+
+        var numOfValidPasswordsByNewPolicy = input.stream().filter(passwordInput -> isValidPasswordByNewPolicy(passwordInput)).count();
+        System.out.println(numOfValidPasswordsByNewPolicy);
     }
 }
