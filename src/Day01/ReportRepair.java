@@ -1,4 +1,4 @@
-package A1;
+package Day01;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class A1 {
+public class ReportRepair {
 
     private static final int TARGET_SUM = 2020;
-    private static final String FILE_NAME = "/home/zyw/dev/aoc/2020/src/A1/data";
+    private static final String FILE_NAME = "/home/zyw/dev/aoc/2020/src/Day01/data";
     private static List<Integer> input;
 
     static {
