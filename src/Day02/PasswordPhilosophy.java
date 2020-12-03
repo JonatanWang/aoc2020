@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class PasswordPhilosophy {
 
-    private static final String FILE_PATH = "/home/zyw/dev/aoc/2020/src/Day02/passwords.txt";
+    private static final String FILE_PATH = "/home/zyw/dev/aoc/2020/src/Day02/input.txt";
     private static List<String> input;
 
     static {

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class ReportRepair {
 
     private static final int TARGET_SUM = 2020;
-    private static final String FILE_NAME = "/home/zyw/dev/aoc/2020/src/Day01/data.txt";
+    private static final String FILE_NAME = "/home/zyw/dev/aoc/2020/src/Day01/input.txt";
     private static List<Integer> input;
 
     static {
