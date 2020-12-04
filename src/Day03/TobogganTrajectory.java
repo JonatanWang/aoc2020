@@ -124,10 +124,7 @@ public class TobogganTrajectory {
     }
 
     public static void main(String[] args) {
-        var numberOfTrees = getNumberOfTreesPart1();
-        System.out.println(numberOfTrees);
 
-        var numberOfTreesPart2 = getNumberOfTreesPart2();
-        System.out.println(numberOfTreesPart2);
+        System.out.println(getNumberOfTreesPart1() + "\n" + getNumberOfTreesPart2());
     }
 }
