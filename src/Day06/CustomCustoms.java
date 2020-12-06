@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.PreparedStatement;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -56,6 +57,24 @@ public class CustomCustoms {
         return result;
     }
 
+    private static HashSet<Character> getIndividualAnswersByGroupPartII(List<String> stringList) {
+        var result = new HashSet<Character>();
+        var charSets = stringList.stream().map(s -> {
+            var charArray = s.toCharArray();
+            var charSet = new HashSet<Character>();
+            for (Character c : charArray) {
+                charSet.add(c);
+            }
+            return charSet;
+        }).collect(Collectors.toSet());
+        result = charSets.iterator().next();
+        for (Set s: charSets) {
+            result.retainAll(s);
+        }
+
+        return result;
+    }
+
     /**
      * Part I: solution to get sum of all 'Yes' of all groups' individuals
      * @return
@@ -68,7 +87,16 @@ public class CustomCustoms {
         return result;
     }
 
+    private static int getSumOfCountsByEveryoneSaidYes() {
+        var result = Integer.MIN_VALUE;
+        var answerLists = getGroupAnswersByList();
+        result = answerLists.stream().mapToInt(list -> getIndividualAnswersByGroupPartII(list).size()).sum();
+
+        return result;
+    }
+
     public static void main(String[] args) {
         System.out.println(getSumOfCounts());
+        System.out.println(getSumOfCountsByEveryoneSaidYes());
     }
 }
