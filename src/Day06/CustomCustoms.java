@@ -57,6 +57,11 @@ public class CustomCustoms {
         return result;
     }
 
+    /**
+     * Find the common 'Yes' answers
+     * @param stringList
+     * @return
+     */
     private static HashSet<Character> getIndividualAnswersByGroupPartII(List<String> stringList) {
         var result = new HashSet<Character>();
         var charSets = stringList.stream().map(s -> {
@@ -87,6 +92,10 @@ public class CustomCustoms {
         return result;
     }
 
+    /**
+     * Part II: solution to get sum of all COMMON 'Yes' of all groups' individuals
+     * @return
+     */
     private static int getSumOfCountsByEveryoneSaidYes() {
         var result = Integer.MIN_VALUE;
         var answerLists = getGroupAnswersByList();
